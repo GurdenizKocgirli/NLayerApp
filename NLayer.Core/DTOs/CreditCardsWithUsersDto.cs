@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.DTOs
 {
-    public class UserWithAdressesDto : UserDto
+    public class CreditCardsWithUsersDto : UserDto
     {
-        public List<AddressDto> Addresses { get; set; }
+        public CreditCardDto CreditCards { get; set; }
     }
 }

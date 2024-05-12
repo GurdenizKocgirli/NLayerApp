@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.Services
 {
-    public interface IUserService : IService<User>
+    public interface ICreditCardService : IService<CreditCard>
     {
-        public Task<CustomResponseDto<CategoryWithProductsDto>> GetSingleCategoryByIdWithProductsAsync(int categoryId);
+        
     }
 }

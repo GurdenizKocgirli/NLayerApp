@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.Repositories
 {
-    public interface IUserRepository : IGenericRepository<User>
+    public interface IAdressRepository : IGenericRepository<Address>
     {
-        Task<List<User>> GetUsersWithCreditCardsAndAddresses();
+        Task<Address> GetSingleUserByIdWithAddressesAsync(int addressId);
     }
 }

@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace NLayer.Repository.Configurations
 {
-    internal class AdressConfiguration : IEntityTypeConfiguration<Address>
+    internal class CreditCardConfiguration : IEntityTypeConfiguration<CreditCard>
     {
-        public void Configure(EntityTypeBuilder<Address> builder)
+        public void Configure(EntityTypeBuilder<CreditCard> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
 
-            builder.ToTable("Adresses");
+            builder.ToTable("CreditCards");
 
-            builder.HasOne(x => x.User).WithMany(x => x.Adress).HasForeignKey(x => x.UserId);
+            builder.HasOne(x => x.User).WithMany(x => x.CreditCard).HasForeignKey(x => x.UserId);
         }
     }
 }
