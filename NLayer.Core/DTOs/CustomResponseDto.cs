@@ -2,8 +2,6 @@
 
 namespace NLayer.Core.DTOs
 {
-
-
     public class CustomResponseDto<T>
     {
         public T Data { get; set; }
