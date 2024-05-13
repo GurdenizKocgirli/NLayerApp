@@ -4,7 +4,5 @@
     {
         Task CommitAsync();
         void Commit();
-
-
     }
 }
