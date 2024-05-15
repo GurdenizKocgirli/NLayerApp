@@ -10,6 +10,6 @@ namespace NLayer.Core.Services
 {
     public interface ICreditCardService : IService<CreditCard>
     {
-        
+        Task<CustomResponseDto<List<CreditCardsWithUsersDto>>> GetCreditCardsWithUsers();
     }
 }

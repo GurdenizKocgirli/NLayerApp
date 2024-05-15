@@ -9,5 +9,6 @@ namespace NLayer.Core.DTOs
     public class CreditCardDto : BaseDto
     {
         public string Name { get; set; }
+        public int UserId { get; set; }
     }
 }

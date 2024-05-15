@@ -12,7 +12,7 @@ using NLayer.Repository;
 namespace NLayer.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240509084136_initial")]
+    [Migration("20240515200913_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,96 @@ namespace NLayer.Repository.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NLayer.Core.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Addresses", (string)null);
+                });
+
+            modelBuilder.Entity("NLayer.Core.Models.CreditCard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CreditCards", (string)null);
+                });
+
+            modelBuilder.Entity("NLayer.Core.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
+                });
+
             modelBuilder.Entity("NLayer.Core.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -107,7 +197,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6555),
+                            CreatedDate = new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7361),
                             Name = "Kalem 1",
                             Price = 100m,
                             Stock = 20
@@ -116,7 +206,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6576),
+                            CreatedDate = new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7372),
                             Name = "Kalem 2",
                             Price = 200m,
                             Stock = 30
@@ -125,7 +215,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6578),
+                            CreatedDate = new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7373),
                             Name = "Kalem 3",
                             Price = 600m,
                             Stock = 60
@@ -134,7 +224,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6580),
+                            CreatedDate = new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7374),
                             Name = "Kitap 1",
                             Price = 600m,
                             Stock = 60
@@ -143,7 +233,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 5,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6582),
+                            CreatedDate = new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7375),
                             Name = "Kitap 2",
                             Price = 6600m,
                             Stock = 320
@@ -196,6 +286,28 @@ namespace NLayer.Repository.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NLayer.Core.Models.Address", b =>
+                {
+                    b.HasOne("NLayer.Core.Models.User", "User")
+                        .WithMany("Adress")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NLayer.Core.Models.CreditCard", b =>
+                {
+                    b.HasOne("NLayer.Core.Models.User", "User")
+                        .WithMany("CreditCard")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("NLayer.Core.Product", b =>
                 {
                     b.HasOne("NLayer.Core.Category", "Category")
@@ -221,6 +333,13 @@ namespace NLayer.Repository.Migrations
             modelBuilder.Entity("NLayer.Core.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("NLayer.Core.Models.User", b =>
+                {
+                    b.Navigation("Adress");
+
+                    b.Navigation("CreditCard");
                 });
 
             modelBuilder.Entity("NLayer.Core.Product", b =>

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.DTOs
 {
-    public class AddressesWithUsersDto : UserDto
+    public class AddressesWithUsersDto : AddressDto
     {
-        public AddressDto Addresses { get; set; }
+        public UserDto User { get; set; }
     }
 }

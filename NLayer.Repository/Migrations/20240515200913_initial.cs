@@ -25,6 +25,23 @@ namespace NLayer.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -44,6 +61,50 @@ namespace NLayer.Repository.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CreditCards",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CreditCards", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CreditCards_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -90,11 +151,11 @@ namespace NLayer.Repository.Migrations
                 columns: new[] { "Id", "CategoryId", "CreatedDate", "Name", "Price", "Stock", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6555), "Kalem 1", 100m, 20, null },
-                    { 2, 1, new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6576), "Kalem 2", 200m, 30, null },
-                    { 3, 1, new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6578), "Kalem 3", 600m, 60, null },
-                    { 4, 2, new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6580), "Kitap 1", 600m, 60, null },
-                    { 5, 2, new DateTime(2024, 5, 9, 11, 41, 35, 991, DateTimeKind.Local).AddTicks(6582), "Kitap 2", 6600m, 320, null }
+                    { 1, 1, new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7361), "Kalem 1", 100m, 20, null },
+                    { 2, 1, new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7372), "Kalem 2", 200m, 30, null },
+                    { 3, 1, new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7373), "Kalem 3", 600m, 60, null },
+                    { 4, 2, new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7374), "Kitap 1", 600m, 60, null },
+                    { 5, 2, new DateTime(2024, 5, 15, 23, 9, 13, 767, DateTimeKind.Local).AddTicks(7375), "Kitap 2", 6600m, 320, null }
                 });
 
             migrationBuilder.InsertData(
@@ -106,6 +167,16 @@ namespace NLayer.Repository.Migrations
                 table: "ProductFeatures",
                 columns: new[] { "Id", "Color", "Height", "ProductId", "Width" },
                 values: new object[] { 2, "Mavi", 300, 2, 500 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_UserId",
+                table: "Addresses",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CreditCards_UserId",
+                table: "CreditCards",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductFeatures_ProductId",
@@ -122,7 +193,16 @@ namespace NLayer.Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "CreditCards");
+
+            migrationBuilder.DropTable(
                 name: "ProductFeatures");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Products");
