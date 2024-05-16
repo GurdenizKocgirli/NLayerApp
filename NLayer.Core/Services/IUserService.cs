@@ -5,6 +5,6 @@ namespace NLayer.Core.Services
 {
     public interface IUserService : IService<User>
     {
-        public Task<CustomResponseDto<UsersWithCreditCardsAndAddresses>> GetSingleUserByIdWithCreditCardsAndUsersAsync(int userId);
+        public Task<CustomResponseDto<UsersWithCreditCardsAndAddressesDto>> GetSingleUserByIdWithCreditCardsAndUsersAsync(int userId);
     }
 }
