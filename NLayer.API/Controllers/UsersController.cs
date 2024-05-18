@@ -30,9 +30,7 @@ namespace NLayer.API.Controllers
         [HttpGet("[action]/{userId}")]
         public async Task<IActionResult> GetSingleUserByIdWithCreditCardsAndUsersAsync(int userId)
         {
-
             return CreateActionResult(await _userService.GetSingleUserByIdWithCreditCardsAndUsersAsync(userId));
-
         }
     }
 }
