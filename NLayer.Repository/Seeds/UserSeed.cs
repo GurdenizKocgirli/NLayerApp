@@ -14,9 +14,9 @@ namespace NLayer.Repository.Seeds
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasData(
-                new User { Id = 1, Name = "Gürdeniz" },
-                new User { Id = 2, Name = "Osman" },
-                new User { Id = 3, Name = "Eren" });
+                new User { Id = 1, Name = "Gürdeniz", Surname = "KOÇGİRLİ" },
+                new User { Id = 2, Name = "Osman", Surname = "ÖZTÜRK" },
+                new User { Id = 3, Name = "Eren", Surname = "TAŞÇI" });
         }
     }
 }
