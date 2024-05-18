@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NLayer.API.Filters;
 using NLayer.Core.DTOs;
 using NLayer.Core.Services;
 
@@ -17,7 +15,6 @@ namespace NLayer.API.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -30,15 +27,11 @@ namespace NLayer.API.Controllers
         
         }
 
-
         // api/categories/GetSingleCategoryByIdWithProducts/2
         [HttpGet("[action]/{categoryId}")]
         public async Task<IActionResult> GetSingleCategoryByIdWithProducts(int categoryId)
         {
-            
             return CreateActionResult(await _categoryService.GetSingleCategoryByIdWithProductsAsync(categoryId));
-          
         }
-
     }
 }
