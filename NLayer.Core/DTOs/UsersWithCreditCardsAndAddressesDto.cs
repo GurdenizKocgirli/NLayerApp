@@ -8,7 +8,7 @@ namespace NLayer.Core.DTOs
 {
     public class UsersWithCreditCardsAndAddressesDto : UserDto
     {
-        public List<AddressDto> Address { get; set; }
-        public List<CreditCardDto> CreditCard { get; set; }
+        public List<AddressDto> Addresses { get; set; } 
+        public List<CreditCardDto> CreditCards { get; set; } 
     }
 }

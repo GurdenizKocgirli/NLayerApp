@@ -16,6 +16,7 @@ namespace NLayer.Service.Mapping
             CreateMap<CreditCard, CreditCardDto>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<ProductUpdateDto, Product>();
+            CreateMap<AddressUpdateDto, Address>();
             CreateMap<Product, ProductWithCategoryDto>();
             CreateMap<Category, CategoryWithProductsDto>();
             CreateMap<User, UsersWithCreditCardsAndAddressesDto>();
