@@ -17,10 +17,7 @@ namespace NLayer.Repository.Repositories
 
         public async Task AddAsync(T entity)
         {
-
             await _dbSet.AddAsync(entity);
-
-
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
@@ -45,7 +42,6 @@ namespace NLayer.Repository.Repositories
 
         public void Remove(T entity)
         {
-
             _dbSet.Remove(entity);
         }
 

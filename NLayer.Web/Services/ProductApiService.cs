@@ -52,9 +52,5 @@ namespace NLayer.Web.Services
             return response.IsSuccessStatusCode;
         }
 
-
-
-     
-
     }
 }

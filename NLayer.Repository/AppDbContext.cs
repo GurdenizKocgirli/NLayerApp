@@ -19,7 +19,7 @@ namespace NLayer.Repository
         public DbSet<Address> Addresses { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
 
-        public override int SaveChanges()
+        public override int SaveChanges() //entityler veri tabanına eklenirken veya güncellenirken oluşturulma tarihlerini otomatik olarak günceller.
         {
             foreach (var item in ChangeTracker.Entries())
             {

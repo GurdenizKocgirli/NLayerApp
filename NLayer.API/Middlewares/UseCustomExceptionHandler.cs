@@ -35,20 +35,7 @@ namespace NLayer.API.Middlewares
 
                 });
 
-
-
-
-
-
-
-
-
-
             });
-
-
-
-
 
         }
     }
