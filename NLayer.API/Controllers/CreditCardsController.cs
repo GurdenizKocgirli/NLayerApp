@@ -39,14 +39,14 @@ namespace NLayer.API.Controllers
         {
             var creditCards = await _creditCardService.GetByIdAsync(id); //_creditCardService, kredi kartıyla ilgili işlemlerdir ve belirli bir id'ye göre asenkron olarak getirilen kredi kartı bilgisini creditCards değişkenine atar
             var creditCardDtos = _mapper.Map<CreditCardDto>(creditCards); //creditCards nesnesindeki değişken _mapper aracılığıyla CreditCardDto veri transfer nesnesine dönüştürülür ve bu nesne creditCardDtos nesnesine atanır
-            return CreateActionResult(CustomResponseDto<CreditCardDto>.Success(200, creditCardDtos)); //CreditCardDto için özel bir yanıt olan CustomResponseDto 
+            return CreateActionResult(CustomResponseDto<CreditCardDto>.Success(200, creditCardDtos)); //CreditCardDto için özel bir yanıt olan CustomResponseDto, CreateActionResult ile birlikte bir IActionResult ile http yanıtı olarak client'a yanıt olarak gönderilir
         }
 
         [HttpPost]
         public async Task<IActionResult> Save(CreditCardDto creditCardDto) //CreditCardDto nesnesi http post isteğiyle alınır bu nesne kredi kartı bilgilerini içerir
         {
             var creditCards = await _creditCardService.AddAsync(_mapper.Map<CreditCard>(creditCardDto)); //kredi kartı bilgilerini içeren creditCardDto nesnesi CreditCard türüne dönüştürülür(mapping) ardından bu değer veri tabanına eklenir
-            var creditCardDtos = _mapper.Map<CreditCardDto>(creditCards); //creditcards değişkenindeki kredi kartı bilgileri CreditCardDto nesnesine dönüştürülür ve creditCArdDtos değişkenine atanır
+            var creditCardDtos = _mapper.Map<CreditCardDto>(creditCards); //creditcards değişkenindeki kredi kartı bilgileri CreditCardDto nesnesine dönüştürülür ve creditCardDtos değişkenine atanır
             return CreateActionResult(CustomResponseDto<CreditCardDto>.Success(201, creditCardDtos)); //CreateActionResult ile CustomResponseDto özel yanıtı döndürülür
         }
 
@@ -58,7 +58,7 @@ namespace NLayer.API.Controllers
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204)); //Güncellenen kredi kartı bilgileri CustomResponseDto özel yanıt veri transferi ile NoContentDto türünde geriye bir şey dönmeyecek şekilde CreateActionResult yardımcı metodu ile IActionResult tipinde client'a döndürülür
         }
 
-        [HttpDelete("{id}")] //client tarafından silme işlemi isteği bu controller'a düşer ve bunu yönlendiren de route'dur. belirli bir veri id'sine göre olduğu dikkatimizden kaçmamalı
+        [HttpDelete("{id}")] //client tarafından silme işlemi isteği bu HttpDelete attribute'a düşer, bu attribute gelen isteği action metoda yönlendirir ve bu istekleri yönlendiren de route'dur. controller sadece route tarafından belirlenen işlemleri yapar. belirli bir veri id'sine göre olduğu dikkatimizden kaçmamalı
         public async Task<IActionResult> Remove(int id) //silinecek olan kredi kartının id si HttpDelete isteği ile alınır
         {
             var creditCard = await _creditCardService.GetByIdAsync(id); //id'si alınan kredi kartının _creditCardService.GetByIdAsync(id) ile asenkron olarak getirilmesi ve creditCard değişkenine atanması sağlanır
