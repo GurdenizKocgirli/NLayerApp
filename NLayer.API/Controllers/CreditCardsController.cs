@@ -4,22 +4,21 @@ using NLayer.API.Filters;
 using NLayer.Core.DTOs;
 using NLayer.Core.Models;
 using NLayer.Core.Services;
-using NLayer.Service.Services;
 
 namespace NLayer.API.Controllers
 {
-    public class CreditCardsController : CustomBaseController
+    public class CreditCardsController : CustomBaseController //Kredi Kartı işlemlerinin controller sınıfının tanımlanması. CustomBaseController sınıfından miras almasının sebebi her controller'da ayrı ayrı olarak route ve apicontroller attribute'larının tanımlanmasıyla uğraşmamaktır.
     {
-        private readonly IMapper _mapper;
-        private readonly ICreditCardService _creditCardService;
+        private readonly IMapper _mapper; //mapping işlemlerinin yapılabilmesi için IMapper türünde bir _mapper tanımlanması. readonly olarak tanımlanmasının sebebi sadece tanımlandıkları yerde yani sınıfın yapıcı metodunda(constructor) bu değişkenin kullanılabilmesini ve daha sonra değiştirilmesine izin vermemeyi sağlamaktır
+        private readonly ICreditCardService _creditCardService; //kredi kartı business işlemleri yapılabilmesi için ICreditCardService türünde bir _creditCardService tanımlanması ve bu değer readonly'dir sadece tanımlandığı sınıfın yapıcı metodunda atanabilir ve daha sonra değiştirilemez
 
-        public CreditCardsController(IMapper mapper, ICreditCardService creditCardService)
+        public CreditCardsController(IMapper mapper, ICreditCardService creditCardService) //bu parametreler ile IMapper ve ICreditCardService işlemlerinin bağımlılıklarının dışarıdan enjekte edilmesi ve private olarak tanımlanmış olan değerlere bu değerlerin atanması sağlanır
         {
-            _mapper = mapper;
+            _mapper = mapper; 
             _creditCardService = creditCardService;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("[action]")] //"[action]" olarak tanımlanmasının nedeni route isminin dinamik olarak metod adıyla aynı olmasını sağlamaktır. metod ismi değişirse route ismi de değişecektir
         public async Task<IActionResult> GetCreditCardsWithUsers()
         {
             return CreateActionResult(await _creditCardService.GetCreditCardsWithUsers()); //CreateActionResult metodu GetCreditCardWithUsers metodundan dönen sonucu alır ve bunu IActionResult türüne dönüştürerek HTTP yanıtı oluşturur.
