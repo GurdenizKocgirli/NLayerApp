@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.DTOs
 {
-    public class ErrorViewModel
+    public class ErrorViewModel //kullanıcı arayüzünde hataları göstermek için kullanılır
     {
         public List<string> Errors { get; set; } = new List<string>();
     }

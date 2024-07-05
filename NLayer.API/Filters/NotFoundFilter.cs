@@ -17,7 +17,8 @@ namespace NLayer.API.Filters
         }
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next) //bu metod aksiyon çalıştırılmadan önce ve sonra çalışacak kodları belirler
-        {
+        { //ActionExecutingContext context, action metodunun çalışmasından hemen önceki durumu temsil eder. http isteği, aksiyon parametreleri, model durumu gibi bilgiler bulunur
+            //ActionExecutingDelegate next, bir Delegate'dir ve action metodun devam etmesini sağlayan bir callback fonksiyondur. Bu delegate çağırıldığında action method çalıştırılır ve action tamamlanmasının ardından dönüş değeri döner
 
             var idValue = context.ActionArguments.Values.FirstOrDefault(); //aksiyon metoduna geçirilen ilk argümanı alır ve idValue değerine atar
 
